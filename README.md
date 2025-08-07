@@ -1,46 +1,63 @@
 ## Desáfio Técnico
 
-- [ ] Criar uma solução que permita o usuário enviar um `.csv` e consiga reaproveitar seu histórico de controle financeiro sem muita dor de cabeça.
-- [ ] Traçar com a leitura dos dados + auxílio de LLM, caso necessário.
-  - [ ] Fonte de renda 
-  - [ ] Gastos fixos mensais
-  - [ ] Entrada e Saída de caixa mensal
-  - [ ] Categoria dos gastos
+- [ ] Criar uma solução que permita enviar múltiplos arquivos do histórico de extrato em formato `.csv`.
 
-### Reforçar conceitos 
+### Como rodar o projeto
 
-#### Redux
+`docker-compose --env-file .env.production up --build`
+
+### Tecnologias selecionadas
+
+Ao se tratar de uma solução financeira, se faz necessário a IDEMPOTÊNCIA, INTEGRIDADE e CONSISTÊNCIA dos dados.
+
+- Optamos por um banco de dados relacional `PostgreSQL`, apesar da desavantagem de ser menos flexível que um NoSQL, garantimos uma solução mais estruturada.
+
+### Decisões Técnicas
+
+Ao selecionar `Node.js` para lidar com operações matemáticas, devemos ter o cuidado de não utilizar o float. Devido as deficiências que o `JS` trás como linguagem.
+
+Por exemplo:
+
+```js
+0.1 + 0.2; // -> 0.30000000000000004
+0.1 + 0.2 === 0.3; // -> false
+```
+
+### Coisas que eu gostaria de implementar
 
 #### Lazy loading
-  - [ ] Revisar: `React.lazy` + `Suspense`
-  - [ ] Exercícios: 
-    - [ ] Prefetch do `bundle`
-    - [ ] Code-split de rotas (Quando lidamos com Next.js, acho que já incluimos isso)
-  - [ ] Critério de Aceite 
-    - [ ] Lighthouse --> Mostrando redução do bundle inicial.
+
+- [ ] Revisar: `React.lazy` + `Suspense`
+- [ ] Exercícios:
+  - [ ] Prefetch do `bundle`
+  - [ ] Code-split de rotas (Quando lidamos com Next.js, acho que já incluimos isso)
+- [ ] Critério de Aceite
+  - [ ] Lighthouse --> Mostrando redução do bundle inicial.
 
 #### Memoização
-   - [ ] `memo` em listas grandes virtualizadas. `https://react.dev/reference/react/memo`
-    
-  - [ ] Memoização
-  - [ ] Validar coisas como React Testing Library ou Jest no Front-end
 
-#### Back-end
+- [ ] `memo` em listas grandes virtualizadas. `https://react.dev/reference/react/memo`
 
-  - [ ] Lidar com GraphQL e reforçar os conceitos de streams aplicados em server-side com API RESTful
-  - [ ] Criar casos de gerenciamentos de filas
-  - [ ] Padrões de Projeto (Design Patterns):
-    - [ ] Factory, Adapter, Singleton, Strategy, Observer
-    - [ ] Princípios SOLID
-    - [ ] DDD
-    - [ ] Documentação com Swagger + Lib que faz 
+#### React Testing Library
 
-#### Banco de dados 
+#### GraphQL
 
-  - [ ] Optar, por criar em um banco não relacional (MongoDB)
+- [ ] Aprender com
 
-#### DevOps
+#### Pipeline com Streams para múltiplos documentos
 
-  - [ ] CI/CD com GitHub Actions
-  - [ ] Docker
-  - [ ] AWS com terraform
+#### Documentação com Swagger + Orval
+
+- [ ] Automação com Orval + Swagger
+- [ ] Automação com GitHub Actions
+
+#### Design Patterns
+
+- [ ] Factory para gerenciamento de Classes
+- [ ] Viabilidade de Adapter, Singleton, Strategy ou Observer
+- [ ] Revisar principios de S.O.L.I.D
+  - [x] Single Responsibility Principle
+  - [ ] Open/Closed Principle
+  - [ ] Liskov Substitution Principle
+  - [x] Interface Segregation Principle
+  - [x] Dependency Inversion Principle
