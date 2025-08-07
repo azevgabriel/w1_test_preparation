@@ -3,12 +3,17 @@ import { Readable } from 'stream';
 export interface FileProperties {
     fieldname: string;
     originalname: string;
+    encoding: string;
     mimetype: string;
-    /** Size of the file in bytes. */
     size: number;
-    stream: Readable;
+}
+
+export interface DiskStoredFile extends FileProperties {
     destination: string;
     filename: string;
-    path: string;
+    path: string; 
+}
+
+export interface MemoryStoredFile extends FileProperties {
     buffer: Buffer;
 }
