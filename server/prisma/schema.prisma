@@ -17,7 +17,7 @@ datasource db {
 model Transaction {
   id          String   @id @default(cuid())
   unit_amount Int
-  currency    String
+  currency    String   @default("BRL")
   description String?
   date        DateTime
   createdAt   DateTime @default(now())
